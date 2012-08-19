@@ -1,7 +1,21 @@
 source 'https://rubygems.org'
 
+# for mongodb
+source 'http://gemcutter.org'
+
+#gem "oauth-plugin", "~> 0.4.0"
+
 gem 'rails', '3.2.3'
 
+gem 'weary'
+gem 'oauth2'
+gem 'devise', :git => "http://github.com/plataformatec/devise.git"
+gem 'warden_oauth'
+
+gem 'oauth2-provider', :require => 'oauth2/provider',
+  :git => 'git://github.com/songkick/oauth2-provider'
+
+gem 'mongo_mapper'
 # Bundle edge Rails instead:
 # gem 'rails', :git => 'git://github.com/rails/rails.git'
 
@@ -36,3 +50,4 @@ gem 'jquery-rails'
 
 # To use debugger
 # gem 'ruby-debug19', :require => 'ruby-debug'
+
