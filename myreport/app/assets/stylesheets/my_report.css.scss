@@ -1,3 +1,127 @@
-// Place all the styles related to the myReport controller here.
+// Place all the styles related to the comingsoon controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+
+body {
+  border-top: 1px solid #666;
+  color: #3F3F38;
+  font-family: Helvetica;
+  font-size: 17px;
+  line-height: 1.4;
+  margin: 0;
+  padding: 0px 0 0 50px;
+  background:#FFFFFF;
+
+}
+
+.impression-box {
+-moz-appearance: none;
+  -moz-box-sizing: border-box;
+  border: 1px solid #EBEBEB;
+  border-radius: 3px 3px 3px 3px;
+  color: #666;
+  font : 16px cronos-pro, Georgia, serif;
+  padding: 5px 5px;
+  margin: 10px 0;
+}
+
+.impression-box:focus {
+  border-color: #666666 !important;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1) inset, 0 0 8px
+    rgba(29, 190, 2, 0.6);
+  outline: 0 none;
+
+}
+
+.mr-mood {
+margin-top:100px;
+margin-left: 55%;
+position: fixed;
+}
+
+.mr-mood-img {
+#background: black;
+width: 60px;
+height: 60px;
+margin-left: 32%;
+margin-right: 40%;
+}
+
+.mr-mood-mesg {
+padding: 5px;
+
+}
+.mr-logo {
+
+margin: 20px;
+padding: 15px;
+border-bottom: 2px solid #EBEBEB;
+width:80%;
+}
+
+.logo {
+
+  margin-left: 35%;
+  margin-right: 30%;
+  margin-top: 60px;
+}
+
+.mr-message {
+  position: absolute;
+  width: 500px;
+  margin: 20px;
+
+}
+
+
+.mail_text_box {
+  -moz-appearance: none;
+  -moz-box-sizing: border-box;
+  #border: 1px solid #8B1D20;
+  border:none;
+  border-radius: 3px 3px 3px 3px;
+  color: #8B1D20;
+  font : 16px cronos-pro, Georgia, serif;
+  #padding: 5px 5px;
+  resize: none;
+  width: 265px;
+
+}
+
+.mail_text_box:focus {
+  border-color: #D60718 !important;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1) inset, 0 0 8px
+    rgba(139, 29, 32, 0.6);
+  outline: 0 none;
+
+}
+
+.links {
+float:right;
+margin-top: 25%;
+margin-right: 100px;
+font: 14px cronos-pro, Georgia, serif;
+}
+
+.footer {
+border-top: 4px solid #8B1D20;
+#width:300px;
+height:50px;
+margin-left:100px;
+margin-right:100px;
+margin-top:600px;
+}
+
+.registerButton {
+  background-color: #686868;
+  height: 35px;
+  box-shadow:   1px 1px 10px #CCCCCC;
+  color: #FFFFFF;
+  cursor: pointer;
+  outline: medium none;
+  padding: 4px 20px;
+  text-decoration: none;
+  border: none;
+  display:inline;
+  width:175px;
+}

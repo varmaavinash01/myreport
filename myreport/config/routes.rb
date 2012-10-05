@@ -1,10 +1,12 @@
 Myreport::Application.routes.draw do
   # The priority is based upon order of creation:
   # first created -> highest priority.
-  match "/create"  => "my_report#create"
-  match "/welcome" => "my_report#index"
-  match "/login"   => "my_report#login"
-  match "/auth"    => "my_report#auth" 
+  match "/create"     => "my_report#create"
+  match "/welcome"    => "my_report#index"
+  match "/login"      => "my_report#login"
+  match "/auth"       => "my_report#auth"
+  match "/sendReport" => "my_report#sendReport"
+  match "/preview"    => "my_report#preview"
   # Sample of regular route:
   #   match 'products/:id' => 'catalog#view'
   # Keep in mind you can assign values other than :controller and :action
