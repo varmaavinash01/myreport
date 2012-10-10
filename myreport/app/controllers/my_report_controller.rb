@@ -40,32 +40,33 @@ class MyReportController < ApplicationController
   end
 
   def preview
-    @report_contents = {}
+    report_contents = {}
       # fixme. Folllowing method must be in model
-    @report_contents = get_report_from_parameters params
-    session[:impression] = params[:report][:impression]
-    session[:awesome] = params[:report][:awesome]
-    session[:painful] = params[:report][:painful]
-    session[:tasks] = params[:report][:tasks]
-    session[:next_week_tasks] = params[:report][:next_week_tasks]
+    report_contents = get_report_from_parameters params
     @user = session[:user]
-    session[:report_contents] =  @report_contents
+    session[:report_contents] =  report_contents
     render "preview"
   end
 
   def sendReport
     # Fixme add common method and filter to pass session variables
+    mailType = params[:mailType]
     @user = session[:user]
     @emailTo = validate_from_email @user['contact']['email_addresses'][0]['address']
     @email_from = validate_from_email @user['contact']['email_addresses'][0]['address']
     #@email_from = validate_from_email "matil@test.com"
-    @report_contents = session[:report_contents]
+    report_contents = session[:report_contents]
       Rails.logger.info "email_from = " + @email_from.to_s
     if @email_from == ""
       # Fixme add proper erro pages. Mostly in this case, the email address can be valid but outside address
       render "error"
     else
-      UserMailer.sendReport(@emailTo,session[:impression],session[:awesome],session[:painful],session[:tasks],session[:next_week_tasks], @email_from).deliver
+      #UserMailer.sendReport(@emailTo,session[:impression],session[:awesome],session[:painful],session[:tasks],session[:next_week_tasks], @email_from).deliver
+      unless mailType == "text"
+        UserMailer.sendReport(@emailTo, report_contents, @email_from, @user).deliver
+      else
+        UserMailer.sendTextReport(@emailTo, report_contents, @email_from, @user).deliver
+      end
       session.clear
       render "reportSent"
     end
