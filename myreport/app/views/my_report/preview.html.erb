@@ -4,7 +4,7 @@
   <%= form_tag("/sendReport") do %>
            <%= submit_tag("", :class => 'registerButton', :value => 'Okay ! Send it') %><br>
            <label>
-             <%= radio_button_tag 'mailType' , 'html'  %>
+             <%= radio_button_tag 'mailType' , 'html', true  %>
              Send As HTML mail
            </label>
            <label>
