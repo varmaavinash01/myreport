@@ -67,6 +67,41 @@ class MyReportController < ApplicationController
       else
         UserMailer.sendTextReport(@emailTo, report_contents, @email_from, @user).deliver
       end
+      url = "http://www.avivarma.com:2929/myreports/"
+      req = Weary::Request.new url, :POST
+      req.params('{
+        "report" : {  
+         "user": {
+              "fullName": "avinash varma",
+              "mugshotURL": "",
+              "birthDate": "march 09",
+              "email": "avinash.varma@mail.rakuten.com",
+              "jobTitle": "Application Engineer",
+              "department": "DU"
+          },
+          "contents": {
+              "impression": "This week was good !",
+              "tasksThisWeek": "none",
+              "tasksNextWeek": "none"
+          },
+          "header": {
+              "senderEmail": "avinash.varma@mail.rakuten.com",
+              "targetEmail": "avinash.varma4464@gmail.com",
+              "dateTo": "12102012",
+              "dateFrom": "16102012",
+              "sentDateTime": "16102012 00:09:90",
+              "mailType": "html"
+            }
+          },
+      
+      
+          "options": {
+              "dateTo": "12102012",
+              "dateFrom": "16102012",
+              "email": "avinash.varma@mail.rakuten.com"
+          }
+      }')
+      req.perform
       session.clear
       render "reportSent"
     end

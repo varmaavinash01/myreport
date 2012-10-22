@@ -1,0 +1,99 @@
+{
+    "job_title": "Application Engineer",
+    "mugshot_url_template": "https://mug0.assets-yammer.com/mugshot/images/{width}x{height}/TrTbbft0GnblX4Gp01W-bWS6Tg-10b0z",
+    "network_id": 31204,
+    "timezone": "Pacific Time (US & Canada)",
+    "external_urls": [],
+    "schools": [],
+    "location": "（東京）楽天タワー7F",
+    "can_broadcast": "false",
+    "birth_date": "March 9",
+    "web_url": "https://www.yammer.com/mail.rakuten.com/users/avinashvarma",
+    "type": "user",
+    "admin": "false",
+    "name": "avinashvarma",
+    "summary": "",
+    "id": 4199315,
+    "network_name": "Rakuten Group",
+    "first_name": "Varma,",
+    "show_ask_for_photo": false,
+    "stats": {
+        "updates": 356,
+        "followers": 237,
+        "following": 542
+    },
+    "state": "active",
+    "full_name": "Varma, Avinash",
+    "last_name": "Avinash",
+    "url": "https://www.yammer.com/api/v1/users/4199315",
+    "network_domains": [
+        "mail.rakuten.com",
+        "rakuten-bank.co.jp",
+        "decisionstep.com",
+        "ebank.jp",
+        "freecause.com",
+        "fusioncom.co.jp",
+        "ikeda.com.br",
+        "kobo.com",
+        "linkshare.com",
+        "bitwallet.co.jp",
+        "mail.rakuten.com.cn",
+        "mail.rakuten.com.tw",
+        "mediaforge.com",
+        "onet.co.jp",
+        "play.com",
+        "priceminister.com",
+        "buy.com",
+        "rakuten.co.id",
+        "rakuten.com.br",
+        "rakuten.com.cn",
+        "rakuten.com.my",
+        "rakuten.com.tw",
+        "rakuten.de",
+        "rakuten-sec.co.jp",
+        "rbs.rakuten.co.jp",
+        "showtime.co.jp",
+        "tarad.com",
+        "tmgmedia.com",
+        "tradoria.de",
+        "vaniti.com",
+        "vau.lt",
+        "voyagermoinscher.com",
+        "wuaki.tv"
+    ],
+    "previous_companies": [
+        {
+            "employer": "Rakuten",
+            "position": "Application Engineer",
+            "end_year": null,
+            "description": "",
+            "start_year": 2011
+        }
+    ],
+    "significant_other": "",
+    "mugshot_url": "https://mug0.assets-yammer.com/mugshot/images/48x48/TrTbbft0GnblX4Gp01W-bWS6Tg-10b0z",
+    "contact": {
+        "phone_numbers": [],
+        "im": {
+            "username": "",
+            "provider": "aim"
+        },
+        "email_addresses": [
+            {
+                "type": "primary",
+                "address": "avinash.varma@mail.rakuten.com"
+            }
+        ]
+    },
+    "expertise": "",
+    "hire_date": null,
+    "activated_at": "2011/02/28 09:24:37 +0000",
+    "verified_admin": "false",
+    "kids_names": "",
+    "interests": "Politics, Business ",
+    "guid": "4ec157d6-1974-4b89-ba62-069dbc9eb9a1",
+    "department": "DU",
+    "settings": {
+        "xdr_proxy": "https://xdrproxy.yammer.com"
+    }
+}
