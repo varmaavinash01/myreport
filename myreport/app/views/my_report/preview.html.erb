@@ -22,7 +22,7 @@
     </div>
     <div style="line-height: 28px; font-size: 18px; color:#222222;margin: -60px 0 0 67px;">
        <%= @user['full_name'] %> |  <%= @user['job_title'] %> | International Mall Group | <%= @user['department'] %><br>
-     <span style="font-family: Helvetica;color: #666666">My weekly report (2012-07-02 to 2012-07-06 )</span>
+     <span style="font-family: Helvetica;color: #666666">My weekly report (<%= DateTime.now.beginning_of_week.strftime("%a %b %d %Y") %> to <%=( DateTime.now.end_of_week - 2 ).strftime("%a %b %d %Y") %> )</span>
      <span style="font-family: Helvetica;color: #666666">Sending email via &nbsp;</span><%= @user['contact']['email_addresses'][0]['address']%>
     </div>
  </div>
