@@ -52,7 +52,9 @@ class MyReportController < ApplicationController
     # Fixme add common method and filter to pass session variables
     mailType = params[:mailType]
     @user = session[:user]
-    @emailTo = validate_from_email @user['contact']['email_addresses'][0]['address']
+    #@emailTo = validate_from_email @user['contact']['email_addresses'][0]['address']
+      # ----- TEST MODE ----
+    @emailTo = "avinash.varma4464@gmail.com"
     @email_from = validate_from_email @user['contact']['email_addresses'][0]['address']
     #@email_from = validate_from_email "matil@test.com"
     report_contents = session[:report_contents]
@@ -67,6 +69,7 @@ class MyReportController < ApplicationController
       else
         UserMailer.sendTextReport(@emailTo, report_contents, @email_from, @user).deliver
       end
+=begin
       url = "http://www.avivarma.com:2929/myreports/"
       req = Weary::Request.new url, :POST
       req.params('{
@@ -102,6 +105,7 @@ class MyReportController < ApplicationController
           }
       }')
       req.perform
+=end      
       session.clear
       render "reportSent"
     end
@@ -119,10 +123,9 @@ class MyReportController < ApplicationController
   def get_report_from_parameters(params)
     @report_contents = {}
     @report_contents["impression"]      = params[:report][:impression]
-    @report_contents["awesome"]         = params[:report][:awesome]
-    @report_contents["painful"]         = params[:report][:painful]
     @report_contents["tasks"]           = params[:report][:tasks]
     @report_contents["next_week_tasks"] = params[:report][:next_week_tasks]
+    @report_contents["other"]           = params[:report][:other]
     @report_contents
   end
 end

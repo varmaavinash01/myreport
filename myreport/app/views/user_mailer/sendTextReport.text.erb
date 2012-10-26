@@ -1,17 +1,9 @@
+
+My weekly report (<%= DateTime.now.beginning_of_week.strftime("%a %b %d %Y") %> to <%= (DateTime.now.end_of_week - 2 ).strftime("%a %b %d %Y") %> )
 ---------------------------------------------------
 Impression of this week
 ---------------------------------------------------
 <%= @report_contents["impression"] %>
-
----------------------------------------------------
-Awesome things of this week
----------------------------------------------------
-<%= @report_contents["awesome"] %>
-
----------------------------------------------------
-Painful things of this week
----------------------------------------------------
-<%= @report_contents["painful"] %>
 
 ---------------------------------------------------
 Tasks of this week
@@ -22,6 +14,11 @@ Tasks of this week
 Next week's tasks and plan
 ---------------------------------------------------
 <%= @report_contents["next_week_tasks"] %>
+
+---------------------------------------------------
+Other comments
+---------------------------------------------------
+<%= @report_contents["other"] %>
 
 
 Thank you for reading ! Have a nice weekend :)
