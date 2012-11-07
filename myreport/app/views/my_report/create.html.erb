@@ -1,52 +1,44 @@
-<div class="mr-logo">
-</div>
-    <div class="mr-message">
-        Let's start ....
-             <%= form_tag("/preview") do %>
-
-          <br>
-          So what is your impression about this week ?<br>
-          <%= text_area "report","impression", "rows" => 6, "cols" => 55, :class => 'impression-box' %>
-<br> <br>
+  <div class="mr-logo">
+  </div>
+  <div class="mr-message">
+    Let's start ....
+    <%= form_tag("/preview") do %>
+      <br>
+      So what is your impression about this week ?<br>
+      <%= text_area "report","impression", "rows" => 6, "cols" => 55, :class => 'impression-box' %>
+      <br> <br>
       Tasks done this week<br>
-       <%= text_area "report","tasks", "rows" => 3, "cols" => 55, :tabindex=>3, :maxlength=>100, :class => 'impression-box' %>
-       <br><br>
-       Plan for next week<br>
-        <%= text_area "report","next_week_tasks", "rows" => 3, "cols" => 55, :tabindex=>3, :maxlength=>100, :class => 'impression-box' %>
-        <br><br>
-
- Anything else ?<br>
-        <%= text_area "report","other", "rows" => 3, "cols" => 55, :tabindex=>3, :maxlength=>100, :class => 'impression-box' %>
-        <br><br>
-    <%= submit_tag("", :class => 'registerButton', :value => 'Preview') %>
-
-     <% end %>
-
-
-  <!--  <input type="button" onclick="mailMe()" class="registerButton" value="Okay ! Mail me when it's ready"/>-->
-    </div>
+      <%= text_area "report","tasks", "rows" => 3, "cols" => 55, :tabindex=>3, :maxlength=>100, :class => 'impression-box' %>
+      <br><br>
+      Plan for next week<br>
+      <%= text_area "report","next_week_tasks", "rows" => 3, "cols" => 55, :tabindex=>3, :maxlength=>100, :class => 'impression-box' %>
+      <br><br>
+      Anything else ?<br>
+      <%= text_area "report","other", "rows" => 3, "cols" => 55, :tabindex=>3, :maxlength=>100, :class => 'impression-box' %>
+      <div class="fixed-box">
+        <%= submit_tag("", :class => 'registerButton', :value => 'Preview') %>
+      </div>
+    <% end %>
+  </div>
   <div style="display:none;">
     <div class="mr-mood">
-    <span style="margin-left:26%;margin-right:32%;">Your expression </span><br><br>
-    <div class="mr-mood-img">
-    <img height=80px width=80px src="http://www.clker.com/cliparts/c/v/w/F/y/R/disappointed-face-th.png"></img>
-    <!-- <img height=80px width=80px src="http://www.clker.com/cliparts/e/8/3/a/11949864601483835659smiley103.svg.thumb.png"></img> -->
-     <!-- <img height=80px width=80px src="http://www.clker.com/cliparts/6/5/b/f/11949864691020941855smiley114.svg.med.png"></img> -->
+      <span style="margin-left:26%;margin-right:32%;">Your expression </span><br><br>
+      <div class="mr-mood-img">
+        <img height=80px width=80px src="http://www.clker.com/cliparts/c/v/w/F/y/R/disappointed-face-th.png"></img>
+   <!-- <img height=80px width=80px src="http://www.clker.com/cliparts/e/8/3/a/11949864601483835659smiley103.svg.thumb.png"></img> -->
+   <!-- <img height=80px width=80px src="http://www.clker.com/cliparts/6/5/b/f/11949864691020941855smiley114.svg.med.png"></img> -->
+      </div>
+      <br><br>
+      <span class="mr-mood-mesg">Awesome !</span>
+      <span class="mr-mood-mesg">Good</span>
+      <span class="mr-mood-mesg">Usual</span>
+      <span class="mr-mood-mesg">Bad</span>
+      <span class="mr-mood-mesg">Painful</span>
     </div>
-    <br><br>
+  </div>
 
-    <span class="mr-mood-mesg">Awesome !</span>
-    <span class="mr-mood-mesg">Good</span>
-    <span class="mr-mood-mesg">Usual</span>
-    <span class="mr-mood-mesg">Bad</span>
-    <span class="mr-mood-mesg">Painful</span>
-    </div>
-
-    </div>
-
-<div style="margin-left: 100px; margin-right: 40%;margin-top:80px;">
-
-     </div>
+  <div style="margin-left: 100px; margin-right: 40%;margin-top:80px;">
+  </div>
 
 
 
