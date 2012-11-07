@@ -7,6 +7,10 @@ Myreport::Application.routes.draw do
   match "/auth"       => "my_report#auth"
   match "/sendReport" => "my_report#sendReport"
   match "/preview"    => "my_report#preview"
+
+
+  # Called with javascript
+  match "/reminderList" => "my_report#add_to_reminder_list"
   # Sample of regular route:
   #   match 'products/:id' => 'catalog#view'
   # Keep in mind you can assign values other than :controller and :action

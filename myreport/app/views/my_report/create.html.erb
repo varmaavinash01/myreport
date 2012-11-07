@@ -5,21 +5,22 @@
     <%= form_tag("/preview") do %>
       <br>
       So what is your impression about this week ?<br>
-      <%= text_area "report","impression", "rows" => 6, "cols" => 55, :class => 'impression-box' %>
+      <%= text_area "report","impression", "rows" => 7, "cols" => 80, :class => 'impression-box' %>
       <br> <br>
       Tasks done this week<br>
-      <%= text_area "report","tasks", "rows" => 3, "cols" => 55, :tabindex=>3, :maxlength=>100, :class => 'impression-box' %>
+      <%= text_area "report","tasks", "rows" => 7, "cols" => 80, :tabindex=>3, :maxlength=>100, :class => 'impression-box' %>
       <br><br>
       Plan for next week<br>
-      <%= text_area "report","next_week_tasks", "rows" => 3, "cols" => 55, :tabindex=>3, :maxlength=>100, :class => 'impression-box' %>
+      <%= text_area "report","next_week_tasks", "rows" => 7, "cols" => 80, :tabindex=>3, :maxlength=>100, :class => 'impression-box' %>
       <br><br>
       Anything else ?<br>
-      <%= text_area "report","other", "rows" => 3, "cols" => 55, :tabindex=>3, :maxlength=>100, :class => 'impression-box' %>
-      <div class="fixed-box">
-        <%= submit_tag("", :class => 'registerButton', :value => 'Preview') %>
-      </div>
-    <% end %>
-  </div>
+      <%= text_area "report","other", "rows" => 7, "cols" => 80, :tabindex=>3, :maxlength=>100, :class => 'impression-box' %>
+    </div>
+    <div class="fixed-box">
+      <%= submit_tag("", :class => 'registerButton', :value => 'Preview') %>
+    </div>
+   <% end %>
+
   <div style="display:none;">
     <div class="mr-mood">
       <span style="margin-left:26%;margin-right:32%;">Your expression </span><br><br>

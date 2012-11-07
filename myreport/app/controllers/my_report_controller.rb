@@ -1,5 +1,5 @@
 class MyReportController < ApplicationController
-
+  respond_to :json, :html
   def create
     #require 'mongo'
     #db = Mongo::Connection.new.db("mydb") # OR
@@ -12,7 +12,6 @@ class MyReportController < ApplicationController
   end
 
   def index
-
   end
 
   def login
@@ -73,7 +72,7 @@ class MyReportController < ApplicationController
       url = "http://www.avivarma.com:2929/myreports/"
       req = Weary::Request.new url, :POST
       req.params('{
-        "report" : {  
+        "report" : {
          "user": {
               "fullName": "avinash varma",
               "mugshotURL": "",
@@ -96,8 +95,8 @@ class MyReportController < ApplicationController
               "mailType": "html"
             }
           },
-      
-      
+
+
           "options": {
               "dateTo": "12102012",
               "dateFrom": "16102012",
@@ -105,8 +104,9 @@ class MyReportController < ApplicationController
           }
       }')
       req.perform
-=end      
-      session.clear
+=end
+      # ----- TEST MODE ----
+      #session.clear
       render "reportSent"
     end
   end
@@ -117,7 +117,7 @@ class MyReportController < ApplicationController
    # checking if the email address is internal email address
    # Fixme Add constant support
    #Constants::Mail::valid_send_address.include?(email.split("@")[1]) ? email : ""
-    ["mail.rakuten.com", "mail.rakuten.co.jp"].include?(email.split("@")[1]) ? email : ""
+    ["mail.rakuten.com", "mail.rakuten.co.jp"].include?(email.split("@")[1]) ? email : false
   end
 
   def get_report_from_parameters(params)
@@ -127,5 +127,14 @@ class MyReportController < ApplicationController
     @report_contents["next_week_tasks"] = params[:report][:next_week_tasks]
     @report_contents["other"]           = params[:report][:other]
     @report_contents
+  end
+
+  def add_to_reminder_list
+    # fix-me : add keyformat to constants
+    key   = params[:day] + "-RemainderMailList-MyReport"
+    email = params[:email]
+    REDIS.rpush(key,email) if validate_from_email email
+    # fix-me: add proper return type
+    respond_with params
   end
 end

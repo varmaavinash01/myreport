@@ -4,21 +4,24 @@
     <title>Myreport</title>
     <%= stylesheet_link_tag    "application", :media => "all" %>
     <%= javascript_include_tag "application" %>
+ <!-- Fixme. Bad remove following code -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.6.1/jquery.min.js"></script>
+  <!-- <script src="http://ajax.cdnjs.com/ajax/libs/json2/20110223/json2.js"></script> -->
     <%= csrf_meta_tags %>
   </head>
-  <body style="background-color: #EEEEEE;">
+  <body class="<%=params[:action] %>">
     <div style="margin-bottom:5%;z-index: 1;width:100%;position:fixed;">
       <div class="header-bar">
-        <h2>MyReport</h2>
+        <h2><a class="link-to-text" href="http://www.avivarma.com:4000/welcome">MyReport</h2>
         <!--  <img src="logo-myreport1.png" /> -->
         <div class="header-text">
           <a href="#"> Huh ? </a>
           <a href="#"> Blog </a>
           <a href="#"> Feedback </a>
         </div>
-      </div>    
+      </div>
     </div>
-  
+
     <%= yield %>
   </body>
 </html>

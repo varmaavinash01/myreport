@@ -1,5 +1,5 @@
 class UserMailer < ActionMailer::Base
- 
+
   def sendReport(emailId, report_contents, from, user)
     @from            = from
     @report_contents = report_contents
@@ -21,7 +21,7 @@ class UserMailer < ActionMailer::Base
     @emailTo         = emailId
     @user            = user
     subject = "[Weekly Report] " + @user['full_name']  + " | " +  @user['job_title'] + " |  "  +  @user['department']
-      
+
     # Fix me  find if any way to replace @
     Rails.logger.info "\n\nSending mail now ... " + report_contents.to_json
     if mail(:to => emailId, :subject => subject, :from => from)
@@ -30,5 +30,5 @@ class UserMailer < ActionMailer::Base
       logger.debug "[ERROR] Mail sending failed"
     end
   end
-  
+
 end

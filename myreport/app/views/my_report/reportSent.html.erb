@@ -1,10 +1,86 @@
-<div class="mr-logo">
-	<div class="mr-message">
-        Report sent to <span style="color:#c7141a;"><b> <%= @emailTo %> </b></span><br><br>
-        TGIF ! Have a nice weekend ! :)
-        </div>
+  <div class="mr-logo">
+  </div>
+  <div class="mr-message">
+      Report sent to <span style="color:#686868;"><b> <%= @emailTo %> </b></span><br><br>
+      TGIF ! Have a nice weekend :)
+  </div>
+  <% sender_email = @user['contact']['email_addresses'][0]['address'] %>
+  <% #if not reminder_registered sender_email %>
+  <% if true %>
+    <div id="reminder-register-form" class="reminder-box">
+      <span><b> Do you often forget your weekly report ? </span> </b><br>
+      We can send a gentle reminder on every <span style="color:#686868;"> <b><%=  DateTime.now.strftime("%A")  %></b></span> to <br><span style="color:#686868;"> <b><%= sender_email %></b></span>. <br>Just reply to it and your report will be sent. <br>What say ?<br><br>
+      <input type="button" id="reminder-button" class="registerButton" value="Fine. Send reminder from next time !" />
+    </div>
 
+    <div id="reminder-register-success" class="reminder-box">
+      It made us happy. :) <br> Thank you for signing to our weekly reminder service.
+    </div>
 
+    <div id="reminder-register-fail" class="reminder-box">
+      Sorry something went wrong at the server side.
+      <br>
+      <div id="remind-register-try-again" >
+        <span style="color:#686868;cursor: pointer;">Try again ?</span>
+       </div>
+    </div>
 
+    <div id="reminder-register-fail-manytimes" class="reminder-box">
+      Ohh..it seems to be some serious issue.<br>
+      Sorry for the inconvenience but would you mind checking it later ?
+      <br>
+      <div id="remind-register-try-again" >
+        <br>
+        Please feel free to express your rant with a <a href="/" style="text-decoration: none;color:#686868;cursor: pointer;" ><b>Feedback</b> </a>
+       </div>
+    </div>
+  <% end %>
 
+ <script>
 
+  $("#reminder-register-success").hide();
+  $("#reminder-register-fail").hide();
+  $("#reminder-register-fail-manytimes").hide();
+  localStorage.fail_attempt = "0";
+
+  $("#reminder-button").click(function(){
+    $.ajax({
+             type: "GET",
+             url: "/reminderList",
+             data: {
+                    day: "<%=  DateTime.now.strftime("%A")  %>",
+                    email: "<%= sender_email %>"
+                   }
+    }).done(function(mesg){
+
+      $("#reminder-register-form").hide();
+      $("#reminder-register-success").show();
+
+    }).fail(function(){
+
+       $("#reminder-register-form").hide();
+
+       if (localStorage.fail_attempt === "1") {
+
+        localStorage.fail_attempt = "0";
+        $("#reminder-register-fail").hide();
+        $("#reminder-register-fail-manytimes").show();
+
+      } else {
+
+        $("#reminder-register-fail").show();
+        $("#reminder-register-fail-manytimes").hide();
+
+      }
+    });
+  });
+
+  $("#remind-register-try-again").click(function(){
+
+    localStorage.fail_attempt = "1";
+    $("#reminder-register-form").show();
+    $("#reminder-register-fail").hide();
+    $("#reminder-register-fail-manytimes").hide();
+
+  });
+ </script>
