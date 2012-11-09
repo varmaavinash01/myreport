@@ -39,35 +39,106 @@ class MyReportController < ApplicationController
   end
 
   def preview
-    report_contents = {}
+    @report_contents = {}
+    @report_options  = {}
       # fixme. Folllowing method must be in model
-    report_contents = get_report_from_parameters params
-    @user = session[:user]
-    session[:report_contents] =  report_contents
-    render "preview"
+    @report_contents = get_report_from_parameters params
+    @report_options  = get_report_options_from_parameters params
+    @user = session[:user] 
+    session[:report_contents] = @report_contents
+    session[:report_options]  = @report_options
+    if validate_report_contents && validate_report_options
+      Rails.logger.info "[Preview] --------------------"
+      Rails.logger.info @report_contents.inspect
+      Rails.logger.info @report_options.inspect
+      render "preview"
+    else
+      @errors = session[:errors]
+      render "create"
+    end
   end
 
   def sendReport
     # Fixme add common method and filter to pass session variables
-    mailType = params[:mailType]
+    report_contents = session[:report_contents]
+    report_options  = session[:report_options]
+    report_options["email_type"] = params[:emailType]  
+    #mailType = params[:mailType]
     @user = session[:user]
     #@emailTo = validate_from_email @user['contact']['email_addresses'][0]['address']
       # ----- TEST MODE ----
-    @emailTo = "avinash.varma4464@gmail.com"
-    @email_from = validate_from_email @user['contact']['email_addresses'][0]['address']
+    #@emailTo = "avinash.varma4464@gmail.com"
+    Rails.logger.info "[SendReport] -------------------------------------------------------------"
+    Rails.logger.info report_contents.inspect
+    Rails.logger.info report_options.inspect
+    @email_to   = validate_from_email report_options["email_to"]
+    @email_from = validate_from_email report_options["email_from"] ? report_options["email_from"] : @user['contact']['email_addresses'][0]['address']
     #@email_from = validate_from_email "matil@test.com"
-    report_contents = session[:report_contents]
-      Rails.logger.info "email_from = " + @email_from.to_s
-    if @email_from == ""
+    unless @email_to and @email_from
       # Fixme add proper erro pages. Mostly in this case, the email address can be valid but outside address
-      render "error"
+      # DRY ki maa behan
+      @report_contents = session[:report_contents] 
+      @error = "Email Error! check to address"
+      render "preview"
     else
       #UserMailer.sendReport(@emailTo,session[:impression],session[:awesome],session[:painful],session[:tasks],session[:next_week_tasks], @email_from).deliver
-      unless mailType == "text"
-        UserMailer.sendReport(@emailTo, report_contents, @email_from, @user).deliver
+      unless report_options["email_type"] == "text"
+        UserMailer.sendReport(@email_to, report_contents, @email_from, @user).deliver
       else
-        UserMailer.sendTextReport(@emailTo, report_contents, @email_from, @user).deliver
+        UserMailer.sendTextReport(@email_to, report_contents, @email_from, @user).deliver
       end
+      # ----- TEST MODE ----
+      #session.clear
+      render "reportSent"
+    end
+  end
+
+  def validate_from_email email
+    #checking syntax of mail address
+   email =~ /^[a-zA-Z][\w\.-]*[a-zA-Z0-9]@[a-zA-Z0-9][\w\.-]*[a-zA-Z0-9]\.[a-zA-Z][a-zA-Z\.]*[a-zA-Z]$/
+   # checking if the email address is internal email address
+   # Fixme Add constant support
+   #Constants::Mail::valid_send_address.include?(email.split("@")[1]) ? email : ""
+    ["mail.rakuten.com", "mail.rakuten.co.jp"].include?(email.split("@")[1]) ? email : false
+  end
+
+  def get_report_from_parameters(params)
+    @report_contents = {}
+    @report_contents["impression"]      = params[:report][:impression]
+    @report_contents["tasks"]           = params[:report][:tasks]
+    @report_contents["next_week_tasks"] = params[:report][:next_week_tasks]
+    @report_contents["other"]           = params[:report][:other]
+    @report_contents
+  end
+  
+  def get_report_options_from_parameters(params)
+    @options = {}
+    @options["email_to"]   = params[:emailTo]
+    @options["email_from"] = params[:emailFrom]
+    @options["cc"]         = params[:emailCc]
+    @options
+  end
+  
+  def validate_report_contents
+    true
+  end
+  
+  def validate_report_options
+    true
+  end
+
+  def add_to_reminder_list
+    # fix-me : add keyformat to constants
+    key   = params[:day] + "-RemainderMailList-MyReport"
+    email = params[:email]
+    REDIS.rpush(key,email) if validate_from_email email
+    # fix-me: add proper return type
+    respond_with params
+  end
+end
+
+
+
 =begin
       url = "http://www.avivarma.com:2929/myreports/"
       req = Weary::Request.new url, :POST
@@ -105,36 +176,3 @@ class MyReportController < ApplicationController
       }')
       req.perform
 =end
-      # ----- TEST MODE ----
-      #session.clear
-      render "reportSent"
-    end
-  end
-
-  def validate_from_email email
-    #checking syntax of mail address
-   email =~ /^[a-zA-Z][\w\.-]*[a-zA-Z0-9]@[a-zA-Z0-9][\w\.-]*[a-zA-Z0-9]\.[a-zA-Z][a-zA-Z\.]*[a-zA-Z]$/
-   # checking if the email address is internal email address
-   # Fixme Add constant support
-   #Constants::Mail::valid_send_address.include?(email.split("@")[1]) ? email : ""
-    ["mail.rakuten.com", "mail.rakuten.co.jp"].include?(email.split("@")[1]) ? email : false
-  end
-
-  def get_report_from_parameters(params)
-    @report_contents = {}
-    @report_contents["impression"]      = params[:report][:impression]
-    @report_contents["tasks"]           = params[:report][:tasks]
-    @report_contents["next_week_tasks"] = params[:report][:next_week_tasks]
-    @report_contents["other"]           = params[:report][:other]
-    @report_contents
-  end
-
-  def add_to_reminder_list
-    # fix-me : add keyformat to constants
-    key   = params[:day] + "-RemainderMailList-MyReport"
-    email = params[:email]
-    REDIS.rpush(key,email) if validate_from_email email
-    # fix-me: add proper return type
-    respond_with params
-  end
-end

@@ -18,7 +18,7 @@ body {
   font-size: 17px;
   line-height: 1.4;
   margin: 0;
-  padding: 0px 0 0 50px;
+  padding: 0px 0 50px 0;
   background:#FFFFFF;
 
 }
@@ -133,7 +133,7 @@ margin-top:600px;
   text-decoration: none;
   border: none;
   display:inline;
-  #width:175px;
+  min-width:175px;
 }
 
     body {
@@ -267,4 +267,10 @@ margin-top:600px;
       margin-top: 5%;
       margin-left: 60%;
       line-height: 185%;
+    }
+    
+    .email-box {
+      height: 26px;
+      padding: 1px;
+      width: 240px;
     }

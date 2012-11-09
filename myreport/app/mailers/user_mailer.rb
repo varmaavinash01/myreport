@@ -8,7 +8,13 @@ class UserMailer < ActionMailer::Base
     subject = "[Weekly Report] " + @user['full_name']  + " | " +  @user['job_title'] + " |  "  +  @user['department']
     # Fix me  find if any way to replace @
     Rails.logger.info "\n\nSending mail now ... " + report_contents.to_json
-    if mail(:to => emailId, :subject =>  subject, :from => from)
+    if mail(
+             :to => emailId, 
+             :subject =>  subject,
+             :from => from,
+             :template_path => 'my_report',
+             :template_name => '_preview_shared'
+           )
       logger.debug "[SUCCESS] from user_mailer mailSent"
     else
       logger.debug "[ERROR] Mail sending failed"
@@ -24,7 +30,13 @@ class UserMailer < ActionMailer::Base
 
     # Fix me  find if any way to replace @
     Rails.logger.info "\n\nSending mail now ... " + report_contents.to_json
-    if mail(:to => emailId, :subject => subject, :from => from)
+    if mail(
+             :to => emailId,
+             :subject => subject,
+             :from => from,
+             :template_path => 'my_report',
+             :template_name => '_preview_shared.text.erb'
+           )
       logger.debug "[SUCCESS] from user_mailer mailSent"
     else
       logger.debug "[ERROR] Mail sending failed"

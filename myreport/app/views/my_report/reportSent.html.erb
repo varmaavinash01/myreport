@@ -1,20 +1,19 @@
   <div class="mr-logo">
   </div>
   <div class="mr-message">
-      Report sent to <span style="color:#686868;"><b> <%= @emailTo %> </b></span><br><br>
+      Report sent to <span style="color:#686868;"><b> <%= @email_to %> </b></span><br><br>
       TGIF ! Have a nice weekend :)
   </div>
-  <% sender_email = @user['contact']['email_addresses'][0]['address'] %>
-  <% #if not reminder_registered sender_email %>
+  <% #if not reminder_registered @email_from %>
   <% if true %>
     <div id="reminder-register-form" class="reminder-box">
       <span><b> Do you often forget your weekly report ? </span> </b><br>
-      We can send a gentle reminder on every <span style="color:#686868;"> <b><%=  DateTime.now.strftime("%A")  %></b></span> to <br><span style="color:#686868;"> <b><%= sender_email %></b></span>. <br>Just reply to it and your report will be sent. <br>What say ?<br><br>
+      We can send a gentle reminder on every <span style="color:#686868;"> <b><%=  DateTime.now.strftime("%A")  %></b></span> to <br><span style="color:#686868;"> <b><%= @email_from %></b></span>. <br>Just reply to it and your report will be sent. <br>What say ?<br><br>
       <input type="button" id="reminder-button" class="registerButton" value="Fine. Send reminder from next time !" />
     </div>
 
     <div id="reminder-register-success" class="reminder-box">
-      It made us happy. :) <br> Thank you for signing to our weekly reminder service.
+      Thank you for signing to our weekly reminder service.<br> It made us happy :)
     </div>
 
     <div id="reminder-register-fail" class="reminder-box">
@@ -49,27 +48,27 @@
              url: "/reminderList",
              data: {
                     day: "<%=  DateTime.now.strftime("%A")  %>",
-                    email: "<%= sender_email %>"
+                    email: "<%= @email_from %>"
                    }
     }).done(function(mesg){
 
-      $("#reminder-register-form").hide();
-      $("#reminder-register-success").show();
+      $("#reminder-register-form").fadeOut("fast");
+      $("#reminder-register-success").fadeIn("slow");
 
     }).fail(function(){
 
-       $("#reminder-register-form").hide();
+       $("#reminder-register-form").fadeOut("fast");
 
        if (localStorage.fail_attempt === "1") {
 
         localStorage.fail_attempt = "0";
-        $("#reminder-register-fail").hide();
-        $("#reminder-register-fail-manytimes").show();
+        $("#reminder-register-fail").fadeOut("fast");;
+        $("#reminder-register-fail-manytimes").fadeIn("slow");
 
       } else {
 
-        $("#reminder-register-fail").show();
-        $("#reminder-register-fail-manytimes").hide();
+        $("#reminder-register-fail").fadeIn("slow");
+        $("#reminder-register-fail-manytimes").fadeOut("fast");
 
       }
     });
@@ -78,9 +77,9 @@
   $("#remind-register-try-again").click(function(){
 
     localStorage.fail_attempt = "1";
-    $("#reminder-register-form").show();
-    $("#reminder-register-fail").hide();
-    $("#reminder-register-fail-manytimes").hide();
+    $("#reminder-register-form").fadeIn("slow");
+    $("#reminder-register-fail").fadeOut("fast");
+    $("#reminder-register-fail-manytimes").fadeOut("fast");
 
   });
  </script>

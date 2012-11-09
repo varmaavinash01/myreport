@@ -5,19 +5,24 @@
     <%= form_tag("/preview") do %>
       <br>
       So what is your impression about this week ?<br>
-      <%= text_area "report","impression", "rows" => 7, "cols" => 80, :class => 'impression-box' %>
+      <%= text_area "report","impression", "rows" => 7, "cols" => 80, :class => 'impression-box', :required => true %>
       <br> <br>
       Tasks done this week<br>
-      <%= text_area "report","tasks", "rows" => 7, "cols" => 80, :tabindex=>3, :maxlength=>100, :class => 'impression-box' %>
+      <%= text_area "report","tasks", "rows" => 7, "cols" => 80, :tabindex=>3, :maxlength=>100, :class => 'impression-box', :required => true %>
       <br><br>
       Plan for next week<br>
-      <%= text_area "report","next_week_tasks", "rows" => 7, "cols" => 80, :tabindex=>3, :maxlength=>100, :class => 'impression-box' %>
+      <%= text_area "report","next_week_tasks", "rows" => 7, "cols" => 80, :tabindex=>3, :maxlength=>100, :class => 'impression-box', :required => true %>
       <br><br>
       Anything else ?<br>
-      <%= text_area "report","other", "rows" => 7, "cols" => 80, :tabindex=>3, :maxlength=>100, :class => 'impression-box' %>
+      <%= text_area "report","other", "rows" => 7, "cols" => 80, :tabindex=>3, :maxlength=>100, :class => 'impression-box', :required => true %>
     </div>
     <div class="fixed-box">
-      <%= submit_tag("", :class => 'registerButton', :value => 'Preview') %>
+      <span style="font-family: Helvetica;color: #666666"><br>Send report to</span><br>
+      <%= email_field_tag 'emailTo', nil, :class => 'email-box', :required => true %><br>
+      <span style="font-family: Helvetica;color: #666666"><br>Sending email via &nbsp;</span><%= @user['contact']['email_addresses'][0]['address']%>
+      <%= hidden_field_tag 'emailFrom', @user['contact']['email_addresses'][0]['address'] %>
+      <%= hidden_field_tag 'emailCc', 'avinash.varma4464@gmail.com' %><br><br>
+      <%= submit_tag("", :id => 'preview-btn', :class => 'registerButton', :value => 'Preview') %>
     </div>
    <% end %>
 
@@ -40,6 +45,21 @@
 
   <div style="margin-left: 100px; margin-right: 40%;margin-top:80px;">
   </div>
+  
+  <script>
+  $("#preview-btn").click(function(){
+     emailIds = [$("#emailTo").val()];
+     if (invalidEmail(emailIds)){
+       //displayError("");
+       return false;
+     }
+     return true;
+   });
+   
+   function invalidEmail(emailIds){
+    return emailIds[0].split("@")[1].indexOf("rakuten") > 0 ? false : true;
+   }
+  </script>
 
 
 

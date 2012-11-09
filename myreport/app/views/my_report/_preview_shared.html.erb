@@ -1,0 +1,36 @@
+    <div style="margin: 20px;padding: 15px;border-bottom: 2px solid #EBEBEB;width:90%;">
+      <div style="height:50px;padding:20px;">
+        <div style="position: absolute;margin: auto; ">
+          <img style="width:auto;height:auto;padding:6px; background: #FFFFFF;" src="<%= @user['mugshot_url'] %>"></img>
+        </div>
+        <div style="line-height: 28px; font-size: 18px; color:#222222;margin: 0 0 0 67px;">
+          <%= @user['full_name'] %> |  <%= @user['job_title'] %> |  <%= @user['department'] %><br>
+          <span style="font-family: Helvetica;color: #666666">My weekly report | From <%= DateTime.now.beginning_of_week.strftime("%a %b %d %Y") %> to <%=( DateTime.now.end_of_week - 2 ).strftime("%a %b %d %Y") %></span>
+          <br>
+        </div>
+      </div>
+    </div>
+    <div style="margin:20px;padding:10px;height:50%; width:90%; background: #FFFFFF;">
+      <br>
+      <span style="color: #3F3F38;font-family: Helvetica;font-size: 17px;text-align: left;font-weight: bold;">Impression of this week </span><br>
+        <br> <%= @report_contents["impression"].gsub(/\n/, '<br>').html_safe %>
+
+        <br><br>
+        <span style="color: #3F3F38;font-family: Helvetica;font-size: 17px;text-align: left;font-weight: bold;">Tasks of this week </span><br>
+        <br><%= @report_contents["tasks"].gsub(/\n/, '<br>').html_safe %>
+
+        <br><br>
+        <span style="color: #3F3F38;font-family: Helvetica;font-size: 17px;text-align: left;font-weight: bold;">Next week's tasks and plan</span><br>
+        <br><%= @report_contents["next_week_tasks"].gsub(/\n/, '<br>').html_safe %>
+
+        <br><br>
+        <span style="color: #3F3F38;font-family: Helvetica;font-size: 17px;text-align: left;font-weight: bold;">Other comments</span><br>
+        <br><%= @report_contents["other"].gsub(/\n/, '<br>').html_safe %>
+        <br><br>
+    </div>
+    <span style="line-height: 28px; font-size: 18px; color:#222222;">
+      Thank you for reading ! Have a nice weekend :)<br><br>
+      <br>
+      Sent via <!-- <img src="http://www.avivarma.com:3000/myReport-logo1-bk.png" style="height: 40px; position: absolute; width: 100px; margin: -10px 0px 0px 10px;"> -->
+      MyReport
+    </span>
