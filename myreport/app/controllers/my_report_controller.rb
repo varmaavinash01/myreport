@@ -8,7 +8,6 @@ class MyReportController < ApplicationController
     Rails.logger.info "connection => " + connection.to_s
     Rails.logger.info "connection.database_names => " + connection.database_names.to_s
     #Report.create(:title => 'Weekly report', :sender_email => 'avinash.varma4464@gmail.com')
-
   end
 
   def index
@@ -44,7 +43,7 @@ class MyReportController < ApplicationController
       # fixme. Folllowing method must be in model
     @report_contents = get_report_from_parameters params
     @report_options  = get_report_options_from_parameters params
-    @user = session[:user] 
+    @user = session[:user]
     session[:report_contents] = @report_contents
     session[:report_options]  = @report_options
     if validate_report_contents && validate_report_options
@@ -62,7 +61,7 @@ class MyReportController < ApplicationController
     # Fixme add common method and filter to pass session variables
     report_contents = session[:report_contents]
     report_options  = session[:report_options]
-    report_options["email_type"] = params[:emailType]  
+    report_options["email_type"] = params[:emailType]
     #mailType = params[:mailType]
     @user = session[:user]
     #@emailTo = validate_from_email @user['contact']['email_addresses'][0]['address']
@@ -77,15 +76,15 @@ class MyReportController < ApplicationController
     unless @email_to and @email_from
       # Fixme add proper erro pages. Mostly in this case, the email address can be valid but outside address
       # DRY ki maa behan
-      @report_contents = session[:report_contents] 
+      @report_contents = session[:report_contents]
       @error = "Email Error! check to address"
       render "preview"
     else
       #UserMailer.sendReport(@emailTo,session[:impression],session[:awesome],session[:painful],session[:tasks],session[:next_week_tasks], @email_from).deliver
       unless report_options["email_type"] == "text"
-        UserMailer.sendReport(@email_to, report_contents, @email_from, @user).deliver
+        UserMailer.sendReport(@email_to, report_contents, @email_from, @user, report_options).deliver
       else
-        UserMailer.sendTextReport(@email_to, report_contents, @email_from, @user).deliver
+        UserMailer.sendTextReport(@email_to, report_contents, @email_from, @user, report_options).deliver
       end
       # ----- TEST MODE ----
       #session.clear
@@ -110,7 +109,7 @@ class MyReportController < ApplicationController
     @report_contents["other"]           = params[:report][:other]
     @report_contents
   end
-  
+
   def get_report_options_from_parameters(params)
     @options = {}
     @options["email_to"]   = params[:emailTo]
@@ -118,11 +117,11 @@ class MyReportController < ApplicationController
     @options["cc"]         = params[:emailCc]
     @options
   end
-  
+
   def validate_report_contents
     true
   end
-  
+
   def validate_report_options
     true
   end

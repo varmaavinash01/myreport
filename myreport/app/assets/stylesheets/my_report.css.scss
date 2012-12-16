@@ -1,276 +1,372 @@
-// Place all the styles related to the comingsoon controller here.
-// They will automatically be included in application.css.
-// You can use Sass (SCSS) here: http://sass-lang.com/
 
+    /* CUSTOMIZE THE NAVBAR
+    -------------------------------------------------- */
 
-.preview {
-  background-color: #eeeeee;
-}
-
-.index {
-  background-color: #ffffff;
-}
-
-body {
-  border-top: 1px solid #666;
-  color: #3F3F38;
-  font-family: Helvetica;
-  font-size: 17px;
-  line-height: 1.4;
-  margin: 0;
-  padding: 0px 0 50px 0;
-  background:#FFFFFF;
-
-}
-
-.impression-box {
-  -moz-appearance: none;
-  -moz-box-sizing: border-box;
-  -webkit-transition: border linear 0.5s, box-shadow linear 0.5s;
-  border: 1px solid #EBEBEB;
-  border-radius: 3px 3px 3px 3px;
-  color: #666;
-  font : 16px cronos-pro, Georgia, serif;
-  padding: 5px 5px;
-  margin: 10px 0;
-}
-
-.impression-box:focus {
-  border-color: #0081cc !important;
-  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1) inset, 0 0 8px
-    rgba(0, 129, 204, 0.6);
-  outline: 0 none;
-
-}
-
-.mr-mood {
-margin-top:100px;
-margin-left: 55%;
-position: fixed;
-}
-
-.mr-mood-img {
-#background: black;
-width: 60px;
-height: 60px;
-margin-left: 32%;
-margin-right: 40%;
-}
-
-.mr-mood-mesg {
-padding: 5px;
-
-}
-.mr-logo {
-
-margin: 20px;
-padding: 15px;
-border-bottom: 2px solid #EBEBEB;
-width:80%;
-}
-
-.logo {
-
-  margin-left: 35%;
-  margin-right: 30%;
-  margin-top: 60px;
-}
-
-.mr-message {
-  position: absolute;
-  width: 500px;
-  margin: 20px;
-  margin-top: 5%;
-}
-
-
-.mail_text_box {
-  -moz-appearance: none;
-  -moz-box-sizing: border-box;
-  #border: 1px solid #8B1D20;
-  border:none;
-  border-radius: 3px 3px 3px 3px;
-  color: #8B1D20;
-  font : 16px cronos-pro, Georgia, serif;
-  #padding: 5px 5px;
-  resize: none;
-  width: 265px;
-
-}
-
-.mail_text_box:focus {
-  border-color: #D60718 !important;
-  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1) inset, 0 0 8px
-    rgba(139, 29, 32, 0.6);
-  outline: 0 none;
-
-}
-
-.links {
-float:right;
-margin-top: 25%;
-margin-right: 100px;
-font: 14px cronos-pro, Georgia, serif;
-}
-
-.footer {
-border-top: 4px solid #8B1D20;
-#width:300px;
-height:50px;
-margin-left:100px;
-margin-right:100px;
-margin-top:600px;
-}
-
-.registerButton {
-  background-color: #686868;
-  height: 35px;
-  box-shadow:   1px 1px 10px #CCCCCC;
-  color: #FFFFFF;
-  cursor: pointer;
-  outline: medium none;
-  padding: 4px 20px;
-  text-decoration: none;
-  border: none;
-  display:inline;
-  min-width:175px;
-}
-
-    body {
-      margin: 0;
-      padding: 0;
-      font-family: Geneva,Helvetica,"Helvetica Neue",Arial,sans-serif;
-      color: #333333;
-    }
-
-    h2 {
-      font-family: Geneva,Helvetica,"Helvetica Neue",Arial,sans-serif;
-      color: #333333;
-      display: inline;
-    }
-    .header-bar {
-    background-color: #222222;
-    height: 60px;
-    }
-    .header-text {
-      float: right;
-      margin-right: 5%;
-      margin-top: 0px;
-      margin-top: -3px;
-    }
-
-    .header-text a {
-      text-decoration: none;
-      background-color: transparent;
-      color: white;
-      display: block;
-      font-size: 18px;
-      line-height: 62px;
-      padding: 0 10px;
-      text-shadow: 0 -1px 0 black;
-      display: inline;
-      margin-top: -5px;
-    }
-
-    h2 {
-      text-decoration: none;
-      background-color: transparent;
-      color: white;
-      font: 26px/34px "Nexa";
-      display: block;
-      line-height: 70px;
-      padding: 0 10px;
-      text-shadow: 0 -1px 0 black;
-      display: inline;
-      #margin-top: -5px;
-    }
-
-    .tag-line {
-      position: relative;
-      margin-top: 15%;
-      margin-left: 20%;
-      margin-right: 20%;
-      text-align: center;
-
-    }
-
-    .steps-box {
-     margin-left: 15%;
-     margin-right: 20%;
-     #position: relative;
-     margin-top: 10%;
-     height: 150px;
-    }
-    .steps-box img {
-      display: inline;
-      margin-left: 7%;
-      margin-right: 7%;
-    }
-
-    .step-desc {
-      margin-left: 15%;
-      margin-right: 20%;
-      #position: relative;
-      margin-top: 1%;
-      height: 200px;
-      color: #666666;
-      display: inline;
-      font: 22px/30px "Nexa";
-    }
-
-    .steps-text {
-      margin-left: 5%;
-      margin-right: 5%;
-    }
-
-    .done {
-      #position: absolute;
-      margin-top: -5%;
-      float: right;
-      margin-right:10%;
-    }
-
-    .start-button {
-      text-align: center;
-      background-color: #222222;
-      height: 45px;
-      color: white;
-      cursor: pointer;
-      outline: medium none;
-      padding: 4px 20px;
-      text-decoration: none;
-      border: none;
-      width:250px;
-    }
-
-    .button-wrapper {
-      margin-left: 45%;
-      margin-right: 45%;
-      height: 100px;
-      widht: 100px;
-      margin-top: 10%;
-    }
-
-
-    .fixed-box {
+    /* Special class on .container surrounding .navbar, used for positioning it into place. */
+    .navbar-wrapper {
+      height: 50px;
+      filter:alpha(opacity=70); 
+      opacity:0.90;
       position: fixed;
-      margin-top:18%;
-      margin-left: 75%;
+      z-index: 10;
+      width: 100%;
+      #margin-top: 20px;
+      margin-bottom: 20px; /* Negative margin to pull up carousel. 90px is roughly margins and height of navbar. */
     }
 
-    .link-to-text {
-      text-decoration: none;
-      color: #ffffff;
+    /* Remove border and change up box shadow for more contrast */
+    .navbar .navbar-inner {
+      border: 0;
+      opacity:1;
+      -webkit-box-shadow: 0 2px 10px rgba(0,0,0,.25);
+         -moz-box-shadow: 0 2px 10px rgba(0,0,0,.25);
+              box-shadow: 0 2px 10px rgba(0,0,0,.25);
     }
 
-    .reminder-box {
-      margin-top: 5%;
-      margin-left: 60%;
-      line-height: 185%;
+    /* Downsize the brand/project name a bit */
+    .navbar .brand {
+      padding: 14px 20px 16px; /* Increase vertical padding to match navbar links */
+      font-size: 16px;
+      font-weight: bold;
+      #text-shadow: 0 -1px 0 rgba(0,0,0,.5);
+    }
+
+    /* Navbar links: increase padding for taller navbar */
+    .navbar .nav > li > a {
+      padding: 15px 20px;
+    }
+
+    /* Offset the responsive button for proper vertical alignment */
+    .navbar .btn-navbar {
+      margin-top: 10px;
+    }
+
+
+
+    /* CUSTOMIZE THE NAVBAR
+    -------------------------------------------------- */
+    
+   
+    /* CSS for create step
+    -------------------------------------------------- */
+    
+    .create-box {
+     text-align: left;
+     margin: 5% 2% 2% 2%;
+     
     }
     
-    .email-box {
-      height: 26px;
-      padding: 1px;
-      width: 240px;
+    
+    .task-box {
+      display: inline;
+      height: 250px;
+      margin-right: 29px;
+      position: relative;
+      width: 40%;
     }
+    
+    .impression-box {
+      max-height: 250px;
+      width: 40%;
+      overflow: auto;
+    }
+    
+    .fixed-box {
+     position: absolute;
+     margin: -63% 2% 20% 50%;
+     height: 250px;
+     width: 40%;
+    }
+  
+    
+    /* Copied CSS */
+    
+    
+       /* GLOBAL STYLES
+    -------------------------------------------------- */
+    /* Padding below the footer and lighter body text */
+
+    body {
+      padding-bottom: 40px;
+      color: #5a5a5a;
+      
+    }
+
+
+
+
+    /* Carousel base class */
+    .carousel {
+      margin-bottom: 20px;
+    }
+
+    .carousel .container {
+      #position: relative;
+      right: 0;
+      bottom: 0;
+      left: 0;
+    }
+
+    .carousel-control {
+      #background-color: transparent;
+      border: 0;
+      font-size: 120px;
+      #margin-top: 10px;
+      text-shadow: 0 1px 1px rgba(0,0,0,.4);
+    }
+
+    .carousel .item {
+      height: 560px;
+      margin-top: 40px;
+    }
+    .carousel img {
+      min-width: 100%;
+      height: 550px;
+    }
+
+    .carousel-caption {
+      background-color: transparent;
+      position: static;
+      max-width: 550px;
+      padding: 0 20px;
+      margin-bottom: 100px;
+    }
+    .carousel-caption h1,
+    .carousel-caption .lead {
+      margin: 0;
+      line-height: 1.25;
+      color: #fff;
+      text-shadow: 0 1px 1px rgba(0,0,0,.4);
+      margin: 20px;
+      width: 40%;
+      
+    }
+    .carousel-caption .btn {
+      margin-top: 10px;
+    }
+
+
+
+    /* MARKETING CONTENT
+    -------------------------------------------------- */
+
+    /* Center align the text within the three columns below the carousel */
+    .marketing .span4 {
+      text-align: center;
+    }
+    .marketing h2 {
+      font-weight: normal;
+    }
+    .marketing .span4 p {
+      margin-left: 10px;
+      margin-right: 10px;
+    }
+
+
+    /* Featurettes
+    ------------------------- */
+
+    .featurette-divider {
+      margin: 80px 0; /* Space out the Bootstrap <hr> more */
+    }
+    .featurette {
+      padding-top: 120px; /* Vertically center images part 1: add padding above and below text. */
+      overflow: hidden; /* Vertically center images part 2: clear their floats. */
+    }
+    .featurette-image {
+      margin-top: -120px; /* Vertically center images part 3: negative margin up the image the same amount of the padding to center it. */
+    }
+
+    /* Give some space on the sides of the floated elements so text doesn't run right into it. */
+    .featurette-image.pull-left {
+      margin-right: 40px;
+    }
+    .featurette-image.pull-right {
+      margin-left: 40px;
+    }
+
+    /* Thin out the marketing headings */
+    .featurette-heading {
+      font-size: 50px;
+      font-weight: 300;
+      line-height: 1;
+      letter-spacing: -1px;
+      margin: 34px 139px 29px 159px;
+    }
+
+
+
+    /* RESPONSIVE CSS
+    -------------------------------------------------- */
+
+    @media (max-width: 979px) {
+
+      .container.navbar-wrapper {
+        margin-bottom: 0;
+        width: 100%;
+        height: 15%;
+      }
+      .navbar-inner {
+        border-radius: 0;
+        margin: -20px 0;
+      }
+
+      .carousel .item {
+        height: 560px;
+        margin-top: 80px;
+      }
+      .carousel img {
+        width: auto;
+        height: 600px;
+      }
+
+      .featurette {
+        height: auto;
+        margin: 20px;
+      }
+      .featurette-image.pull-left,
+      .featurette-image.pull-right {
+        display: block;
+        float: none;
+        max-width: 40%;
+        margin: 0 auto 20px;
+      }
+    }
+
+
+    @media (max-width: 767px) {
+
+      .navbar-inner {
+        margin: -20px;
+      }
+
+      .carousel {
+        margin-left: -20px;
+        margin-right: -20px;
+      }
+      .carousel .container {
+
+      }
+      .carousel .item {
+        height: 300px;
+        margin-top: 80px;
+      }
+      .carousel img {
+        height: 300px;
+      }
+      .carousel-caption {
+        width: 65%;
+        padding: 0 70px;
+        margin-bottom: 40px;
+      }
+      .carousel-caption h1 {
+        font-size: 30px;
+      }
+      .carousel-caption .lead,
+      .carousel-caption .btn {
+        font-size: 18px;
+        margin: 20px;
+        width: 40%;
+      }
+
+      .marketing .span4 + .span4 {
+        margin-top: 40px;
+      }
+
+      .featurette-heading {
+        font-size: 30px;
+      }
+      .featurette .lead {
+        font-size: 18px;
+        line-height: 1.5;
+        margin: 20px;
+        width: 40%;
+      }
+
+    
+    }
+    
+    .subtitle {
+      font-family: 'Anaheim', sans-serif;
+      font-size: 28px;
+      font-weight:0.5;
+      padding: 10px;
+    }
+    
+    .sub-subtitle {
+      font-family: 'Anaheim', sans-serif;
+      font-size: 18px;
+      font-weight:0.5;
+      color: #2975d9;
+    }
+    
+    .steps-box{
+      margin: 33% auto;
+      width: 100%;
+      text-align: center;
+    }
+    
+    .step-img {
+     display: inline;
+     margin:2% 6% 2% 5%;
+     align: center;
+     
+    }
+    
+    .step-txt {
+      display: inline;
+      font-size: 22px;
+      margin: 2% 8% 2% 4%;
+      padding-left: 36px;
+      padding-right: 0;
+    }
+    
+    .preview-fixed {
+      margin-top: 10%;
+      margin-left: 70%;
+      position: fixed;
+      
+    }
+    
+    .radio-btn {
+    display:inline;
+    }
+    
+    
+     .sent-fixed {
+      margin-top:-5%;
+      margin-left: 70%;
+      position: fixed;
+      
+    }
+    
+    .registerButton {
+	background-color: #686868;
+	height: 25px;
+	box-shadow:   1px 1px 10px #CCCCCC;
+	color: #FFFFFF;
+	cursor: pointer;
+	margin-left: 10px;
+	outline: medium none;
+	padding: 4px 20px;
+	text-decoration: none;
+	border: none;
+	width: auto;
+}
+
+ .create-fixed-box {
+     #position: absolute;
+     margin: -62% 2% 20% 50%;
+     height: 250px;
+     width: 40%;
+    }
+    
+  .coming-soon {
+    text-align: left;
+    margin-left: 30px;
+    margin-top: 15%;
+    
+  }
+  
+
+    
