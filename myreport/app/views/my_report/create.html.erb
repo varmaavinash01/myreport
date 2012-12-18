@@ -1,25 +1,25 @@
 <div style="padding: 30px;">
-    
-    <%= form_tag("/preview") do %>
-      <br>
-      <br>
-      Let's start ....<br>
-      what is your impression about this week ?<br><br>
-      <%= text_area "report","impression", :class => 'impression-box', :required => true %>
-      <br> <br>
-      <div class="tasks-wrapper">
-        <div style="display: inline;">
-          Tasks done this week<br><br>
-          <%= text_area "report","tasks", :tabindex=>3, :maxlength=>100, :class => 'task-box', :required => true %>
-        </div>
-        <div style="display: inline;">  
-          <span style="display: inline;position: absolute;margin-top: -40px;">Plan for next week</span>
-          <%= text_area "report","next_week_tasks", :tabindex=>3, :maxlength=>100, :class => 'task-box', :required => true %>
-        </div>
-      </div>  
-      <br><br>
-      Anything else ?<br>
-      <%= text_area "report","other", "rows" => 7, "cols" => 80, :tabindex=>3, :maxlength=>100, :class => 'impression-box', :required => true %>
+  <%= form_tag("/preview") do %>
+    <br><br>
+    Let's start 
+    <br>what is your impression about this week ?<br><br>
+    <%= text_area "report","impression", :class => 'impression-box', :required => true %>
+    <br> <br>
+    <div class="tasks-wrapper">
+      <div style="display: inline;">
+        Tasks done this week<br><br>
+        <%= text_area "report","tasks", :tabindex=>3, :maxlength=>100, :class => 'task-box', :required => true %>
+      </div>
+      
+      <div style="display: inline;">  
+        <span style="display: inline;position: absolute;margin-top: -40px;">Plan for next week</span>
+        <%= text_area "report","next_week_tasks", :tabindex=>3, :maxlength=>100, :class => 'task-box', :required => true %>
+      </div>
+    </div>  
+    <br><br>
+    Anything else ?
+    <br>
+    <%= text_area "report","other", "rows" => 7, "cols" => 80, :tabindex=>3, :maxlength=>100, :class => 'impression-box', :required => true %>
     
     <div class="create-fixed-box ">
       <span style="font-family: Helvetica;color: #666666"><br>Send report to</span><br>
@@ -34,38 +34,34 @@
       <span style="font-family: Helvetica;color: #666666">Sending email via &nbsp;</span><b><%= @user['contact']['email_addresses'][0]['address']%></b>
       <%= hidden_field_tag 'emailFrom', @user['contact']['email_addresses'][0]['address'] %><br><br>
       <%= submit_tag("", :id => 'preview-btn', :class => 'registerButton', :value => 'Preview') %>
-    </div>
-  </div>  
-   <% end %>
- </div>  
-  <script>
+    </div> 
+  <% end %>
+</div>  
+
+<script>
   
   $("#mailCc").is(':checked') ? $("#ccBox").fadeIn("slow") : $("#ccBox").fadeOut("slow") ;
+    //$("#ccBox").hide();
   
-  //$("#ccBox").hide();
-  
-  $("#mailCc").click(function(){
-    if($(this).is(':checked')) { 
+   $("#mailCc").click(function() {
+     if($(this).is(':checked')) { 
       $("#ccBox").fadeIn("slow");
-    } else { 
+     }else { 
        $("#ccBox").fadeOut("slow");
        $("#emailCc").val("");
-    }
-  });
-  $("#preview-btn").click(function(){
-     emailIds = [$("#emailTo").val()];
-     if (invalidEmail(emailIds)){
-       //displayError("");
-       return false;
      }
-     return true;
-   });
-   
-   function invalidEmail(emailIds){
+  });
+  
+  $("#preview-btn").click(function() {
+    emailIds = [$("#emailTo").val()];
+    if (invalidEmail(emailIds)){
+      //displayError("");
+      return false;
+    }
+    return true;
+  });
+  
+  function invalidEmail(emailIds) {
     return emailIds[0].split("@")[1].indexOf("rakuten") > 0 ? false : true;
-   }
-  </script>
-
-
-
-
+  }
+</script>

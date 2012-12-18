@@ -1,10 +1,11 @@
 <div style="padding-top: 30px;">
- <%= @error%>
+  <%= @error%>
   <div id="html-report">
     <div style="position: absolute;width: 65%; margin-bottom: 5%;padding: 8px;margin-left:1%; margin-right: 15%;background-color: #FFFFFF;">
       <%= render :partial => "preview_shared" %>
     </div>
   </div>
+  
   <div id="text-report">
     <div style="position: absolute;width: 65%; margin-bottom: 5%;padding: 8px;margin-left:1%; margin-right: 15%;background-color: #FFFFFF;">
       <div style="margin: 20px;padding: 15px;border-bottom: 2px solid #EBEBEB;width:80%;">
@@ -13,44 +14,42 @@
       </div>
     </div>
   </div>  
+  
   <div class="preview-fixed">
     <%= form_tag("/sendReport") do %>
-           <label>
-             <%= radio_button_tag 'emailType' , 'html', true , :class => 'radio-btn'%>
-              HTML
-           </label>
-           <label>
-             <%= radio_button_tag 'emailType' , 'text', false , :class => 'radio-btn' %>
-               Text
-           </label><br>
-           <span style="font-family: Helvetica;color: #666666"><br>Sending report to &nbsp;</span><br><b><%= @report_options["email_to"]%><br></b>
-           <% unless @report_options["cc"].blank? %>
-             <span style="font-family: Helvetica;color: #666666"><br>Sending copy of report to &nbsp;</span><br><b><%= @report_options["cc"] %><br></b>
-           <% end %>
-           <span style="font-family: Helvetica;color: #666666"><br>Sending report via &nbsp;</span><br><b><%= @report_options["email_from"] ? @report_options["email_from"] : @user['contact']['email_addresses'][0]['address']%></b>
-           <br><br>
-           <%= submit_tag("", :id => "send-btn", :class => 'registerButton', :value => 'Okay ! Send it') %><br>
-         <% end %><br><br>
+      <label>
+        <%= radio_button_tag 'emailType' , 'html', true , :class => 'radio-btn'%>
+        HTML
+      </label>
+      <label>
+        <%= radio_button_tag 'emailType' , 'text', false , :class => 'radio-btn' %>
+        Text
+      </label>
+      <br>
+      <span style="font-family: Helvetica;color: #666666"><br>Sending report to &nbsp;</span><br><b><%= @report_options["email_to"]%><br></b>
+      <% unless @report_options["cc"].blank? %>
+        <span style="font-family: Helvetica;color: #666666"><br>Sending copy of report to &nbsp;</span><br><b><%= @report_options["cc"] %><br></b>
+      <% end %>
+      <span style="font-family: Helvetica;color: #666666"><br>Sending report via &nbsp;</span><br><b><%= @report_options["email_from"] ? @report_options["email_from"] : @user['contact']['email_addresses'][0]['address']%></b>
+      <br><br>
+      <%= submit_tag("", :id => "send-btn", :class => 'registerButton', :value => 'Okay ! Send it') %><br>
+    <% end %>
+    <br><br>
   </div>
 </div>  
-  <script>
-   $("#text-report").hide();
-   
-   $(".radio-btn").click(function(){
+
+<script>
+  $("#text-report").hide(); 
+  
+  $(".radio-btn").click(function() {
     
     var mailType = $("input[type='radio']:checked").val();
     if (mailType === "text") {
-    
-    $("#html-report").fadeOut("fast");
-    $("#text-report").fadeIn("slow");
-    
+      $("#html-report").fadeOut("fast");
+      $("#text-report").fadeIn("slow");
     } else {
-    
-    $("#html-report").fadeIn("slow");
-    $("#text-report").fadeOut("fast");
-    
+      $("#html-report").fadeIn("slow");
+      $("#text-report").fadeOut("fast");
     }
-   
-   });
-   
-  </script>
+  });
+</script>

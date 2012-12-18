@@ -1,51 +1,51 @@
-  <div class="mr-logo">
-  </div>
-  <div class="mr-message" style="padding-top: 130px; padding-left: 30px;">
-      Report sent to <span style="color:#686868;"><b> <%= @email_to %> </b></span><br><br>
-      Have a nice weekend :)
-  </div>
-  <% #if not reminder_registered @email_from %>
-  <div class="sent-fixed">
-    <% if true %>
-      <div id="reminder-register-form" class="reminder-box">
-        <span><b> Do you often forget your weekly report ? </span> </b><br><br>
-        We can send a gentle reminder on every <span style="color:#686868;"> <b><%=  DateTime.now.strftime("%A")  %></b></span> to <br><span style="color:#686868;"> <b><%= @email_from %></b></span>. <br><br>Just reply to it and your report will be sent. <br>What say ?<br><br>
-        <input type="button" id="reminder-button" class="registerButton" value="Fine. Send reminder from next time !" />
-      </div>
+<div class="mr-logo">
+</div>
+<div class="mr-message" style="padding-top: 130px; padding-left: 30px;">
+  Report sent to <span style="color:#686868;"><b> <%= @email_to %> </b></span><br><br>
+  Have a nice weekend :)
+</div>
+<% #if not reminder_registered @email_from %>
+<div class="sent-fixed">
+   <% if true %>
+     <div id="reminder-register-form" class="reminder-box">
+       <span><b> Do you often forget your weekly report ? </span> </b><br><br>
+       We can send a gentle reminder on every <span style="color:#686868;"> <b><%=  DateTime.now.strftime("%A")  %></b></span> to <br><span style="color:#686868;"> <b><%= @email_from %></b></span>. <br><br>Just reply to it and your report will be sent. <br>What say ?<br><br>
+       <input type="button" id="reminder-button" class="registerButton" value="Fine. Send reminder from next time !" />
+     </div>
 
-      <div id="reminder-register-success" class="reminder-box">
-        Thank you for signing to our weekly reminder service.<br> It made us happy :)
-      </div>
+     <div id="reminder-register-success" class="reminder-box">
+       Thank you for signing to our weekly reminder service.<br> It made us happy :)
+     </div>
 
-      <div id="reminder-register-fail" class="reminder-box">
-        Sorry something went wrong at the server side.
-        <br>
-        <div id="remind-register-try-again" >
-          <span style="color:#686868;cursor: pointer;">Try again ?</span>
-         </div>
-      </div>
+     <div id="reminder-register-fail" class="reminder-box">
+       Sorry something went wrong at the server side.
+       <br>
+       <div id="remind-register-try-again" >
+         <span style="color:#686868;cursor: pointer;">Try again ?</span>
+        </div>
+     </div>
 
-      <div id="reminder-register-fail-manytimes" class="reminder-box">
-        Ohh..it seems to be some serious issue.<br>
-        Sorry for the inconvenience but would you mind checking it later ?
-        <br>
-        <div id="remind-register-try-again" >
-          <br>
-          Please feel free to express your rant with a <a href="/" style="text-decoration: none;color:#686868;cursor: pointer;" ><b>Feedback</b> </a>
-         </div>
-      </div>
-    </div>  
-  <% end %>
-  <div class="coming-soon">
-    <b>What's cooking ? </b>
-    <br><br>
-      <img height="80" width="80" src="logoJIRAPNG.png"> JIRA integration coming soon !
-      <br><br> Translate your reports.
-      <br><br> View reports sent by others. 
-      <br><br> Show your mood in your report.
-      <br><br><b>Check my <a target="_blank" style="text-decoration: none;" href="http://bit.ly/12hGZKw">trello development board</a> for more.
-      
-  </div>
+     <div id="reminder-register-fail-manytimes" class="reminder-box">
+       Ohh..it seems to be some serious issue.<br>
+       Sorry for the inconvenience but would you mind checking it later ?
+       <br>
+       <div id="remind-register-try-again" >
+         <br>
+         Please feel free to express your rant with a <a href="/" style="text-decoration: none;color:#686868;cursor: pointer;" ><b>Feedback</b> </a>
+       </div>
+     </div>
+   </div>  
+ <% end %>
+ 
+ <div class="coming-soon">
+  <b>What's cooking ? </b>
+  <br><br>
+  <img height="80" width="80" src="logoJIRAPNG.png"> JIRA integration coming soon !
+  <br><br> Translate your reports.
+  <br><br> View reports sent by others. 
+  <br><br> Show your mood in your report.
+  <br><br><b>Check my <a target="_blank" style="text-decoration: none;" href="http://bit.ly/12hGZKw">trello development board</a> for more.
+</div>
 
  <script>
 
