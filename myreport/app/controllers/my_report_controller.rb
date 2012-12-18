@@ -1,24 +1,15 @@
 class MyReportController < ApplicationController
   respond_to :json, :html
   def create
-    #require 'mongo'
-    #db = Mongo::Connection.new.db("mydb") # OR
-    connection = Mongo::Connection.new("localhost", 27017)
-    db = connection.db("mydb")
-    Rails.logger.info "connection => " + connection.to_s
-    Rails.logger.info "connection.database_names => " + connection.database_names.to_s
-    #Report.create(:title => 'Weekly report', :sender_email => 'avinash.varma4464@gmail.com')
   end
 
   def index
   end
 
   def login
-    Rails.logger.info "Login called. Prepare to call yammer authentication"
   end
 
   def auth
-    Rails.logger.info "auth called"
     unless params[:error].blank?
       Rails.logger.info "Yammer Auth Error" + params[:error] + params[:error_description]
       render 'authError'
@@ -31,7 +22,7 @@ class MyReportController < ApplicationController
       @result = req.perform
       @body   = ActiveSupport::JSON.decode @result.body
       @user   = @body["user"]
-      Rails.logger.info @user.to_json
+      Rails.logger.info "[USER] = " + @user.to_json
       session[:user] = @user
       render 'create'
     end # Auth success if closed
@@ -47,9 +38,6 @@ class MyReportController < ApplicationController
     session[:report_contents] = @report_contents
     session[:report_options]  = @report_options
     if validate_report_contents && validate_report_options
-      Rails.logger.info "[Preview] --------------------"
-      Rails.logger.info @report_contents.inspect
-      Rails.logger.info @report_options.inspect
       render "preview"
     else
       @errors = session[:errors]
@@ -72,12 +60,11 @@ class MyReportController < ApplicationController
     Rails.logger.info report_options.inspect
     @email_to   = validate_from_email report_options["email_to"]
     @email_from = validate_from_email report_options["email_from"] ? report_options["email_from"] : @user['contact']['email_addresses'][0]['address']
-    #@email_from = validate_from_email "matil@test.com"
     unless @email_to and @email_from
       # Fixme add proper erro pages. Mostly in this case, the email address can be valid but outside address
       # DRY ki maa behan
       @report_contents = session[:report_contents]
-      @error = "Email Error! check to address"
+      @error = "Email Error! check 'TO' address"
       render "preview"
     else
       #UserMailer.sendReport(@emailTo,session[:impression],session[:awesome],session[:painful],session[:tasks],session[:next_week_tasks], @email_from).deliver
@@ -119,10 +106,12 @@ class MyReportController < ApplicationController
   end
 
   def validate_report_contents
+    # Add in future. Mostly in model
     true
   end
 
   def validate_report_options
+    # Add in future. Mostly in model
     true
   end
 
