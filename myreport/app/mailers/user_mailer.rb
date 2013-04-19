@@ -31,7 +31,7 @@ class UserMailer < ActionMailer::Base
     @report_contents = report_contents
     @emailTo         = emailId
     @user            = user
-    @mailCc          = options['mailCc']
+    @mailCc          = options['cc']
     subject = "[Weekly Report] " + @user['full_name']  + " | " +  @user['job_title'] + " |  "  +  @user['department']
 
     # Fix me  find if any way to replace @

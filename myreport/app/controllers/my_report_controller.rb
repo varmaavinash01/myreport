@@ -1,6 +1,8 @@
 class MyReportController < ApplicationController
   respond_to :json, :html
+  
   def create
+    @user = session[:user]
   end
 
   def index
@@ -18,20 +20,18 @@ class MyReportController < ApplicationController
       url   = "https://www.yammer.com/oauth2/access_token.json?client_id=7HbmqEWoS7at6ID0pemSg&client_secret=nVccg50Zlk6YxWg5uiQutqCkMYxucf5Nyx89zNYc&code=" + token
       #url  = Constants::URL::yammer_url+token
       req   = Weary::Request.new url, :GET
-
+      
       @result = req.perform
       @body   = ActiveSupport::JSON.decode @result.body
       @user   = @body["user"]
       Rails.logger.info "[USER] = " + @user.to_json
       session[:user] = @user
-      render 'create'
-    end # Auth success if closed
+      redirect_to :action=>'create'
+    end 
   end
 
   def preview
-    @report_contents = {}
-    @report_options  = {}
-      # fixme. Folllowing method must be in model
+    # fixme. Folllowing method must be in model
     @report_contents = get_report_from_parameters params
     @report_options  = get_report_options_from_parameters params
     @user = session[:user]
@@ -50,32 +50,29 @@ class MyReportController < ApplicationController
     report_contents = session[:report_contents]
     report_options  = session[:report_options]
     report_options["email_type"] = params[:emailType]
-    #mailType = params[:mailType]
     @user = session[:user]
-    #@emailTo = validate_from_email @user['contact']['email_addresses'][0]['address']
       # ----- TEST MODE ----
     #@emailTo = "avinash.varma4464@gmail.com"
     Rails.logger.info "[SendReport] -------------------------------------------------------------"
     Rails.logger.info report_contents.inspect
     Rails.logger.info report_options.inspect
     @email_to   = validate_from_email report_options["email_to"]
-    @email_from = validate_from_email report_options["email_from"] ? report_options["email_from"] : @user['contact']['email_addresses'][0]['address']
-    unless @email_to and @email_from
+    @email_from = validate_from_email report_options["email_from"] || @user['contact']['email_addresses'][0]['address']
+    if @email_to and @email_from
+      if  report_options["email_type"] == "text"
+        UserMailer.sendTextReport(@email_to, report_contents, @email_from, @user, report_options).deliver
+      else
+        UserMailer.sendReport(@email_to, report_contents, @email_from, @user, report_options).deliver
+      end
+      # ----- TEST MODE ----
+      #session.clear
+      render "reportSent"
+    else
       # Fixme add proper erro pages. Mostly in this case, the email address can be valid but outside address
       # DRY ki maa behan
       @report_contents = session[:report_contents]
       @error = "Email Error! check 'TO' address"
       render "preview"
-    else
-      #UserMailer.sendReport(@emailTo,session[:impression],session[:awesome],session[:painful],session[:tasks],session[:next_week_tasks], @email_from).deliver
-      unless report_options["email_type"] == "text"
-        UserMailer.sendReport(@email_to, report_contents, @email_from, @user, report_options).deliver
-      else
-        UserMailer.sendTextReport(@email_to, report_contents, @email_from, @user, report_options).deliver
-      end
-      # ----- TEST MODE ----
-      #session.clear
-      render "reportSent"
     end
   end
 
@@ -124,43 +121,3 @@ class MyReportController < ApplicationController
     respond_with params
   end
 end
-
-
-
-=begin
-      url = "http://www.avivarma.com:2929/myreports/"
-      req = Weary::Request.new url, :POST
-      req.params('{
-        "report" : {
-         "user": {
-              "fullName": "avinash varma",
-              "mugshotURL": "",
-              "birthDate": "march 09",
-              "email": "avinash.varma@mail.rakuten.com",
-              "jobTitle": "Application Engineer",
-              "department": "DU"
-          },
-          "contents": {
-              "impression": "This week was good !",
-              "tasksThisWeek": "none",
-              "tasksNextWeek": "none"
-          },
-          "header": {
-              "senderEmail": "avinash.varma@mail.rakuten.com",
-              "targetEmail": "avinash.varma4464@gmail.com",
-              "dateTo": "12102012",
-              "dateFrom": "16102012",
-              "sentDateTime": "16102012 00:09:90",
-              "mailType": "html"
-            }
-          },
-
-
-          "options": {
-              "dateTo": "12102012",
-              "dateFrom": "16102012",
-              "email": "avinash.varma@mail.rakuten.com"
-          }
-      }')
-      req.perform
-=end
