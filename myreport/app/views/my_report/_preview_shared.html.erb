@@ -22,11 +22,6 @@
         <br><br>
         <span style="color: #3F3F38;font-family: Helvetica;font-size: 17px;text-align: left;font-weight: bold;">Next week's tasks and plan</span><br>
         <br><%= @report_contents["next_week_tasks"].gsub(/\n/, '<br>').html_safe %>
-
-        <br><br>
-        <span style="color: #3F3F38;font-family: Helvetica;font-size: 17px;text-align: left;font-weight: bold;">Other comments</span><br>
-        <br><%= @report_contents["other"].gsub(/\n/, '<br>').html_safe %>
-        <br><br>
     </div>
     <span style="line-height: 28px; font-size: 18px; color:#222222;">
       Thank you for reading ! Have a nice weekend :)<br><br>

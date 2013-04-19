@@ -48,7 +48,6 @@ class Report
       report_contents["impression"]      = params[:report][:impression]
       report_contents["tasks"]           = params[:report][:tasks]
       report_contents["next_week_tasks"] = params[:report][:next_week_tasks]
-      report_contents["other"]           = params[:report][:other]
       report_contents
     end
     
