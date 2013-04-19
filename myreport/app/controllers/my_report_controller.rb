@@ -31,15 +31,11 @@ class MyReportController < ApplicationController
   end
 
   def preview
-    # fixme. Folllowing method must be in model
-    @report_contents = get_report_from_parameters params
-    @report_options  = get_report_options_from_parameters params
+    @report_contents = Report.build_report session, params
+    @report_options  = Report.set_options  session, params
     @user = session[:user]
-    session[:report_contents] = @report_contents
-    session[:report_options]  = @report_options
-    if validate_report_contents && validate_report_options
-      render "preview"
-    else
+    
+    unless Report.validate?
       @errors = session[:errors]
       render "create"
     end
@@ -83,33 +79,6 @@ class MyReportController < ApplicationController
    # Fixme Add constant support
    #Constants::Mail::valid_send_address.include?(email.split("@")[1]) ? email : ""
     ["mail.rakuten.com", "mail.rakuten.co.jp"].include?(email.split("@")[1]) ? email : false
-  end
-
-  def get_report_from_parameters(params)
-    @report_contents = {}
-    @report_contents["impression"]      = params[:report][:impression]
-    @report_contents["tasks"]           = params[:report][:tasks]
-    @report_contents["next_week_tasks"] = params[:report][:next_week_tasks]
-    @report_contents["other"]           = params[:report][:other]
-    @report_contents
-  end
-
-  def get_report_options_from_parameters(params)
-    @options = {}
-    @options["email_to"]   = params[:emailTo]
-    @options["email_from"] = params[:emailFrom]
-    @options["cc"]         = params[:emailCc]
-    @options
-  end
-
-  def validate_report_contents
-    # Add in future. Mostly in model
-    true
-  end
-
-  def validate_report_options
-    # Add in future. Mostly in model
-    true
   end
 
   def add_to_reminder_list
