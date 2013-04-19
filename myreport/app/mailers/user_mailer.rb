@@ -1,6 +1,6 @@
 class UserMailer < ActionMailer::Base
 
-  def sendReport(emailId, report_contents, from, user, options)
+  def sendHtmlReport(emailId, report_contents, from, user, options)
     @from            = from
     @report_contents = report_contents
     @emailTo         = emailId

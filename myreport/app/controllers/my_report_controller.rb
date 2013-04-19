@@ -42,24 +42,14 @@ class MyReportController < ApplicationController
   end
 
   def sendReport
-    # Fixme add common method and filter to pass session variables
-    report_contents = session[:report_contents]
-    report_options  = session[:report_options]
-    report_options["email_type"] = params[:emailType]
     @user = session[:user]
+    @email_to   = Report.validate_email session, 'email_to'
+    @email_from = Report.validate_email session, 'email_from' || @user['contact']['email_addresses'][0]['address']
+    Report.set_email_type(session, params[:emailType])
+    
       # ----- TEST MODE ----
     #@emailTo = "avinash.varma4464@gmail.com"
-    Rails.logger.info "[SendReport] -------------------------------------------------------------"
-    Rails.logger.info report_contents.inspect
-    Rails.logger.info report_options.inspect
-    @email_to   = validate_from_email report_options["email_to"]
-    @email_from = validate_from_email report_options["email_from"] || @user['contact']['email_addresses'][0]['address']
-    if @email_to and @email_from
-      if  report_options["email_type"] == "text"
-        UserMailer.sendTextReport(@email_to, report_contents, @email_from, @user, report_options).deliver
-      else
-        UserMailer.sendReport(@email_to, report_contents, @email_from, @user, report_options).deliver
-      end
+    if Report.send(session, @email_to, @email_from)
       # ----- TEST MODE ----
       #session.clear
       render "reportSent"
@@ -70,15 +60,6 @@ class MyReportController < ApplicationController
       @error = "Email Error! check 'TO' address"
       render "preview"
     end
-  end
-
-  def validate_from_email email
-    #checking syntax of mail address
-   email =~ /^[a-zA-Z][\w\.-]*[a-zA-Z0-9]@[a-zA-Z0-9][\w\.-]*[a-zA-Z0-9]\.[a-zA-Z][a-zA-Z\.]*[a-zA-Z]$/
-   # checking if the email address is internal email address
-   # Fixme Add constant support
-   #Constants::Mail::valid_send_address.include?(email.split("@")[1]) ? email : ""
-    ["mail.rakuten.com", "mail.rakuten.co.jp"].include?(email.split("@")[1]) ? email : false
   end
 
   def add_to_reminder_list
