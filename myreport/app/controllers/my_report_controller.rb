@@ -1,8 +1,16 @@
 class MyReportController < ApplicationController
   respond_to :json, :html
-  
+  require 'jiraSOAP'
   def create
     @user = session[:user]
+    jira = JIRA::JIRAService.new 'https://rakuten.atlassian.net/'
+    
+    jira.login "avinash.varma", REDIS.get("jira")
+    #@issues = jira.issues_from_filter_with_id 15527
+    @auth = jira.auth_token
+    @gen = JIRA::IssueProperty
+    @issues_this_week = jira.issues_from_jql_search "(assignee = currentUser() OR assignee was currentUser() OR reporter = currentUser()) AND updatedDate >= startOfWeek() AND updatedDate <= now() AND timespent >= 1"
+    @issues_future    = jira.issues_from_jql_search "assignee = currentUser() AND resolution = Unresolved and priority >= Major" 
   end
 
   def index
@@ -66,7 +74,7 @@ class MyReportController < ApplicationController
     # fix-me : add keyformat to constants
     key   = params[:day] + "-RemainderMailList-MyReport"
     email = params[:email]
-    REDIS.rpush(key,email) if validate_from_email email
+    REDIS.rpush(key,email)
     # fix-me: add proper return type
     respond_with params
   end

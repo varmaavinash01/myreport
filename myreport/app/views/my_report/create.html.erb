@@ -1,19 +1,19 @@
 <div style="padding: 30px;">
+
   <%= form_tag("/preview") do %>
     <br><br>
     Let's start 
     <br>what is your impression about this week ?<br><br>
-    <%= text_area "report","impression", :class => 'impression-box', :required => true %>
+    <%= text_area "report","impression", :value => "", :class => 'impression-box', :required => true %>
     <br> <br>
     <div class="tasks-wrapper">
       <div style="display: inline;">
         Tasks done this week<br><br>
-        <%= text_area "report","tasks", :tabindex=>3, :maxlength=>100, :class => 'task-box', :required => true %>
+        <%= text_area "report","tasks",:value => get_issue_titles(@issues_this_week), :tabindex=>3, :class => 'task-box', :required => true %>
       </div>
-      
       <div style="display: inline;">  
         <span style="display: inline;position: absolute;margin-top: -40px;">Plan for next week</span>
-        <%= text_area "report","next_week_tasks", :tabindex=>3, :maxlength=>100, :class => 'task-box', :required => true %>
+        <%= text_area "report","next_week_tasks", :value => get_issue_titles(@issues_future), :tabindex=>3, :class => 'task-box', :required => true %>
       </div>
     </div>  
     <br><br>
